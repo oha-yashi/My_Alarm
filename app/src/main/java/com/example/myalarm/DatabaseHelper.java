@@ -73,12 +73,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static String toString(Context context, int _id){
-        StringBuilder rtn = new StringBuilder("null");
+        StringBuilder rtn = new StringBuilder("|");
         try(Cursor cursor = newDatabase(context).rawQuery("SELECT * FROM alarm_list WHERE _id="+_id,null)){
-            rtn.delete(0,rtn.length());
+            cursor.moveToFirst();
             for(int i=0; i<cursor.getColumnCount(); i++){
                 rtn.append(cursor.getString(i));
-                rtn.append(",");
+                rtn.append("|");
             }
         }
         return rtn.toString();

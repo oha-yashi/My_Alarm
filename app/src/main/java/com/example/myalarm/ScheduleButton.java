@@ -2,6 +2,9 @@ package com.example.myalarm;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -20,6 +23,11 @@ public class ScheduleButton extends androidx.appcompat.widget.AppCompatButton {
         this.setOnClickListener(view -> {
             new AlertDialog.Builder(context)
                     .setMessage(DatabaseHelper.toString(context,_id))
+                    .setNegativeButton("削除",(dialogInterface, i) -> {
+                        try(SQLiteDatabase db = DatabaseHelper.newDatabase(context)){
+                            db.execSQL("DELETE FROM alarm_list WHERE _id="+_id);
+                        }
+                    })
                     .show();
         });
     }
