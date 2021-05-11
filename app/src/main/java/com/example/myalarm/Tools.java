@@ -57,4 +57,11 @@ public class Tools {
         }
         return rtn;
     }
+
+    public static String toOnlyTimeStamp(String timestamp){
+        return timestamp.substring(11,19);
+    }
+    public static String toOnlyTimeStamp(Calendar calendar){
+        return toOnlyTimeStamp(toTimestamp(calendar));
+    }
 }
